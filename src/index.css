@@ -2,45 +2,95 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-} 
+}
+
 /* -----------------home */
-.home h1{
-  font-size: max(50px);
+.home-h1 {
+  font-size: 50px !important;
   font-weight: 500;
   color: '#2d2d2d'
 }
-.btnNav {
+
+.btn-main {
   background-color: #2590e8;
   color: white !important;
-padding: 10px 5px;
+
+}
+.btn-home{
+  padding: 10px 5px;
   font-size: 18px;
   width: 50% !important;
 }
-.home{
+
+.home {
   height: 80vh;
- }
-.btnNav:active,
-.btnNav:hover {
+}
+
+.btn-main:active,
+.btn-main:hover {
   background-color: #217bc4 !important;
   box-shadow: 0 0 0.5rem #2590e8 !important;
+}
+
+/* -------------------------forms */
+.container-form{
+  box-shadow: 0 0 0.25rem #bbd3e8 !important;
+}
+.input-container {
+  position: relative;
+  /* Set the width of the input container */
+}
+
+.input-container i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  /* Adjust the left position based on your design */
+  color: #2590e8;
+  /* Set the color of the icon */
+}
+
+.input-container input {
+  padding-left: 30px;
+  /* Adjust the left padding based on the icon width and position */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn-main-disable{
+background-color:#878787 !important;
+color: white !important;
+}
+
+.btn-main-disable:active,
+.btn-main-disable:hover {
+  background-color: #515050 !important;
+  box-shadow: 0 0 0.5rem #878787 !important;
   /* box-shadow: 0 0 0.5rem #2590e8; */
 
 }
-@media (max-width:1200px){
-  .home h1{
-    font-size: 40px
+
+
+
+
+
+/* -------------------------media query */
+@media (max-width:1200px) {
+  .home-h1 {
+    font-size: 40px !important
   }
- }
-@media (max-width:929px){
-  .home{
-   height: auto;
+}
+
+@media (max-width:929px) {
+  .home {
+    height: auto;
   }
-  .home h1{
-    font-size: 40px
-  }
- }
- /* @media (max-width:767px){
-  .home h1{
-    font-size: 32px
+
+}
+
+/* @media (max-width:767px){
+  .home-h1{
+    font-size: 32px !important
   }
  } */
