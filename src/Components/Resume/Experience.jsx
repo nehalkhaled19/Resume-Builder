@@ -32,7 +32,7 @@ export default function Experience() {
               <i className="fa-solid fa-circle-check"></i> Experience 1</h4>
 
             {/* form */}
-            <form className='row  mb-2 border-bottom ' >
+            <form className='row pb-4 border-bottom ' >
 
               {/* row one */}
               <div className=" col-md-4 my-4">
@@ -71,7 +71,7 @@ export default function Experience() {
           </section>
 
           {/* buttons */}
-          <div className='w-100 text-center mt-4'>
+          <div className='w-100 text-center mt-2'>
             <Link to='../'>
               <button className=' btn btn-main-disable px-3 m-2'>
                 <i className="fa-solid fa-angle-left me-2"></i>

@@ -24,29 +24,34 @@ useEffect(()=>{
         <div className=' mx-md-5 mx-3 mt-3 mb-3'>
 
           {/* form */}
-          <form className='row mb-2 border-bottom ' >
+          <form className='row  pb-4 border-bottom ' >
 
             {/* row one */}
-            <div className=" col-md-12 my-4">
+            <div className=" col-md-12 my-3">
                 <input name="tags" placeholder=" Enter your Technical Skills" className='form-control tags-input' defaultValue=""/>
             </div>
-            <div className=" col-md-12 my-4">
+            <div className=" col-md-12 my-3">
             <input name="tags" placeholder="  Enter your Interpersonal Skills" className='form-control tags-input' defaultValue=""/>
             </div>
-            <div className="col-md-12 mb-4">
+            <div className="col-md-12 my-3">
             <input name="tags" placeholder="Languages" className='form-control tags-input' defaultValue=""/>
             </div>
           </form>
 
 
           {/* buttons */}
-          <div className='w-100 text-center mt-4'>
-            <Link to='../experience'>
+          <div className='w-100 text-center mt-2'>
+            <Link to='../education'>
               <button className=' btn btn-main-disable px-3 m-2'>
                 <i className="fa-solid fa-angle-left me-2"></i>
                 Back
               </button>
             </Link>
+            <Link style={{opacity:'0'}}>
+                  <button className=' btn btn-main px-3'>
+                    Next
+                    <i className="fa-solid fa-angle-right ms-2"></i></button>
+                </Link>
     
           </div>
 

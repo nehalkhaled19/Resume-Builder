@@ -29,7 +29,7 @@ export default function EducationDetails() {
             {/* Education */}
             <section>
               {/* form */}
-              <form className='row  mb-2 border-bottom ' >
+              <form className='row  pb-4 border-bottom ' >
 
                 {/* row one */}
                 <div className=" col-md-4 my-4">
@@ -68,7 +68,7 @@ export default function EducationDetails() {
             </section>
 
             {/* buttons */}
-            <div className='w-100 text-center mt-4'>
+            <div className='w-100 text-center mt-2'>
               <Link to='../projects'>
                 <button className=' btn btn-main-disable px-3 m-2'>
                   <i className="fa-solid fa-angle-left me-2"></i>
