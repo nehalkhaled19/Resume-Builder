@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import img1 from '../../images/home-img-1.png'
 import { Link } from 'react-router-dom'
-import TypeIt from "typeit";
 import { TypeAnimation } from 'react-type-animation';
 
 export default function Home() {

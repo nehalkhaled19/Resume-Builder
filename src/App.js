@@ -1,5 +1,5 @@
 import React from 'react'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom'
 import Layout from './Components/Layout/Layout'
 import Home from './Components/Home/Home'
 import Resume from './Components/Resume/Resume'
@@ -11,7 +11,7 @@ import Skills from './Components/Resume/Skills'
 
 export default function App() {
 
-  const roots = createBrowserRouter([
+  const roots = createHashRouter([
     {
       path: '/', element: <Layout />, children: [
         { index: true, element: <Home /> },

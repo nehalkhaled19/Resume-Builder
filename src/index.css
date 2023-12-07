@@ -4,6 +4,10 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.cursor{
+  cursor: pointer;
+
+}
 /* -----------------home */
 .home-h1 {
   font-size: 50px !important;
@@ -16,6 +20,7 @@ body {
   color: white !important;
 
 }
+
 .btn-home{
   padding: 10px 5px;
   font-size: 18px;
@@ -51,13 +56,12 @@ body {
   /* Set the color of the icon */
 }
 
-.input-container input {
-  padding-left: 30px;
+.input-container input, .tagify {
+  /* padding-left: 30px; */
   /* Adjust the left padding based on the icon width and position */
-  width: 100%;
   box-sizing: border-box;
 }
-
+/* to go back */
 .btn-main-disable{
 background-color:#878787 !important;
 color: white !important;
@@ -71,10 +75,21 @@ color: white !important;
 
 }
 
+/* to add */
+.btn-add {
+  background-color: #e87d25;
+  color: white !important;
+}
+.btn-add:active,
+.btn-add:hover {
+  background-color: #d16309 !important;
+  box-shadow: 0 0 0.5rem #e87d25 !important;
+}
 
-
-
-
+/* -----------------------skills */
+.tagify{
+  width: 100;
+}
 /* -------------------------media query */
 @media (max-width:1200px) {
   .home-h1 {
