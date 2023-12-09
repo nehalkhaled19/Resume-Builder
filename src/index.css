@@ -9,6 +9,7 @@ body {
 
 }
 /* -----------------home */
+
 .home-h1 {
   font-size: 50px !important;
   font-weight: 500;
@@ -85,6 +86,11 @@ color: white !important;
   background-color: #d16309 !important;
   box-shadow: 0 0 0.5rem #e87d25 !important;
 }
+/* to remove */
+.btn-remove{
+  color: red;
+  cursor: pointer;
+}
 
 /* -----------------------skills */
 .tagify{
@@ -103,9 +109,3 @@ color: white !important;
   }
 
 }
-
-/* @media (max-width:767px){
-  .home-h1{
-    font-size: 32px !important
-  }
- } */

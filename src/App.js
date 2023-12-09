@@ -10,6 +10,16 @@ import Projects from './Components/Resume/Projects'
 import Skills from './Components/Resume/Skills'
 
 export default function App() {
+// // Function to remove the item from local storage
+// const removeItemFromLocalStorage = () => {
+//   localStorage.removeItem('experienceNum');
+//   localStorage.removeItem('projectNum');
+//   localStorage.removeItem('educationNum');
+// };
+
+// // Attach the beforeunload event listener to the window
+// window.addEventListener('beforeunload', removeItemFromLocalStorage);
+
 
   const roots = createHashRouter([
     {
