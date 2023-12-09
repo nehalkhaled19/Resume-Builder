@@ -10,7 +10,7 @@ useEffect(()=>{
   inputs.forEach(function(input) {
     // Check if Tagify is not already applied to the element
     if (!input.classList.contains('tagify')) {
-      new Tagify(input);
+      new Tagify(input,{maxTags: 15});
     }
   });
 
@@ -48,13 +48,19 @@ useEffect(()=>{
               </button>
             </Link>
             <Link style={{opacity:'0'}}>
-                  <button className=' btn btn-main px-3'>
+                  <button className=' btn btn-main  px-3'>
                     Next
                     <i className="fa-solid fa-angle-right ms-2"></i></button>
                 </Link>
     
           </div>
-
+          <div className='text-end my-2' >
+          <Link >
+                  <button className='btn btn-add px-3'>
+                    DOWNLOAD RESUME  
+                    <i className=" mx-2 fa-solid fa-download" c></i></button>
+                </Link>
+                </div>
         </div>
 
       </header>

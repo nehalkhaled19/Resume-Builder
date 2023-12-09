@@ -1,35 +1,59 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 
 export default function Experience() {
+  const [experienceNum, setExperienceNum] = useState(localStorage.getItem('Num') != null ? localStorage.getItem('Num') : 0);
+  const [experience, setExperience] = useState([experienceNum]);
+
+    localStorage.clear("experienceNum", experienceNum)
+
+
   useEffect(() => {
 
-    document.getElementById("endDate").addEventListener("focus", function () {
+    // date input
+    document.getElementById("endDate")?.addEventListener("focus", function () {
       this.setAttribute("type", "date");
       document.getElementById('endDateIcon').style.display = 'none'
-
     });
-    document.getElementById("startDate").addEventListener("focus", function () {
+    document.getElementById("startDate")?.addEventListener("focus", function () {
       this.setAttribute("type", "date");
       document.getElementById('startDateIcon').style.display = 'none'
     });
   }, [])
+
+  useEffect(() => {
+    document.getElementById("add")?.addEventListener("click", handleAddClick);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      document.getElementById("add")?.removeEventListener("click", handleAddClick);
+    };
+  }, [experience]);
+
+  let handleAddClick = () => {
+    const updatedExperienceNum = experienceNum + 1;
+    setExperienceNum(updatedExperienceNum);
+    setExperience([...experience, updatedExperienceNum]);
+    localStorage.setItem('Num', updatedExperienceNum.toString());
+    console.log(updatedExperienceNum.toString());
+  };
+
   return (
-    <section className='py-5  container d-flex align-items-center home '>
+    <section className='py-5 container h-auto d-flex align-items-center home '>
       <header className='border border-2 pb-3 container-form w-100'>
         <h2 className='text-center py-4 border border-1 m-3 shadow-sm'>Experience Details</h2>
         <div className=' mx-md-5 mx-3 mt-3 mb-3'>
           {/* to add experience */}
-          <div className='w-100 my-4 text-end'>
-            <button className='btn btn-add  ms-auto'>
+          <div className='w-100 text-end'>
+            <button id='add' className='btn btn-add  ms-auto'>
               <i className="fa-solid fa-plus mx-2"></i>
               Add New Experience </button>
           </div>
           {/* experience */}
-          <section>
+          {experience?.map((e, index) => <section className=' my-4' id={e}>
             <h4 className='m-0' style={{ color: '#2590e8' }}>
-              <i className="fa-solid fa-circle-check"></i> Experience 1</h4>
+              <i className="fa-solid fa-circle-check"></i> Experience {index + 1}</h4>
 
             {/* form */}
             <form className='row pb-4 border-bottom ' >
@@ -63,12 +87,14 @@ export default function Experience() {
               </div>
               <div className=" col-md-8 mb-4">
                 <div className="input-container">
-                  <i class="fa-solid fa-file-lines"></i>
+                  <i className="fa-solid fa-file-lines"></i>
                   <textarea className='form-control p-2' rows={1} placeholder='Description *' />
                 </div>
               </div>
             </form>
-          </section>
+
+
+          </section>)}
 
           {/* buttons */}
           <div className='w-100 text-center mt-2'>
