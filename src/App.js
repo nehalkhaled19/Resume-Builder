@@ -8,6 +8,7 @@ import EducationDetails from './Components/Resume/EducationDetails'
 import Experience from './Components/Resume/Experience'
 import Projects from './Components/Resume/Projects'
 import Skills from './Components/Resume/Skills'
+import FormContectProvider from './ContextForm'
 
 export default function App() {
 // // Function to remove the item from local storage
@@ -40,6 +41,8 @@ export default function App() {
     }
   ])
   return <>
+  <FormContectProvider>
     <RouterProvider router={roots}></RouterProvider>
+    </FormContectProvider>
   </>
 }
