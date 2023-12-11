@@ -98,7 +98,7 @@ export default function PersonalDetails() {
           {/* buttons */}
           <div className=' text-center border-top p-0 pt-3'>
 
-            <button className=' btn btn-main-disable px-3 m-2' style={{ opacity: '0' }}>
+            <button type='button' className=' btn btn-main-disable px-3 m-2' style={{ opacity: '0' }}>
               <i className="fa-solid fa-angle-left me-2"></i>
               Back
             </button>

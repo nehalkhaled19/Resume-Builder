@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useFormik } from 'formik';
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { FormContect } from '../../ContextForm';
 
 export default function EducationDetails() {
-
+  let { educate,setEducate} = useContext(FormContect)
+  const navigate = useNavigate();
   // TO add education
   const [educationNum, setEducationNum] = useState(1)
   const [education, setEducation] = useState(() => {
@@ -21,7 +24,6 @@ useEffect(()=>{
         if (prevEducation.length > 0) {
           const updatedEducation = prevEducation.slice(0, -1);
           // Save the updatedEducation array to local storage
-         console.log( updatedEducation);
           localStorage.setItem('educationNum', updatedEducation);
           return updatedEducation;
         } else {
@@ -30,6 +32,20 @@ useEffect(()=>{
       });
     })
   })
+
+       // date input
+       document.querySelectorAll(".endDate").forEach((button) => {
+        button.addEventListener("focus", (e) => {
+          e.target.setAttribute("type", "date");
+        })
+      })
+      document.querySelectorAll(".startDate").forEach((button) => {
+        button.addEventListener("focus", (e) => {
+          e.target.setAttribute("type", "date");
+        })
+      })
+  
+
 } , [])
 
   // to add
@@ -40,20 +56,39 @@ useEffect(()=>{
       setEducationNum(updatEdeducationNum);
       setEducation([...education, updatEdeducationNum]);
     });
+     // Update form values whenever education changes
+     forms.setValues({
+      ...forms.values,
+      educations: education.map((e) => ({
+        unviersity: '',
+        firstYear: '',
+        lastYear: '',
+        degree: '',
+        description: '',
+      })),
+    });
   }, [education]);
 
-// to handle date
-  useEffect(() => {
-    document.getElementById("endDate").addEventListener("focus", function () {
-      this.setAttribute("type", "date");
-      document.getElementById('endDateIcon').style.display = 'none'
 
-    });
-    document.getElementById("startDate").addEventListener("focus", function () {
-      this.setAttribute("type", "date");
-      document.getElementById('startDateIcon').style.display = 'none'
-    });
+
+  // Formik
+  const forms = useFormik({
+    initialValues: {
+      educations: education.map((e) => ({
+        unviersity: '',
+        firstYear: '',
+        lastYear: '',
+        degree: '',
+        description: '',
+      })),
+    },
+    onSubmit: (values) => {
+      setEducate(values)
+      navigate('../skills')
+      // You can save or handle the entire form data here
+    }
   })
+
     return (
       <section className='py-5 h-auto  container d-flex align-items-center home '>
         <header className='border border-2 pb-3 container-form w-100'>
@@ -66,64 +101,64 @@ useEffect(()=>{
                 Add New Education </button>
             </div>
             {/* Education */}
+            <form onSubmit={forms.handleSubmit}>
             {education?.map((e, index) => <section className=' my-4' id={e}>
             <div className='text-end mb-2'>
-            {index != 0 ?  <i className="fa-solid fa-circle-xmark fa-xl btn-remove" ></i>:"" }  
+            {index != 0 ?  <i type='button' className="fa-solid fa-circle-xmark fa-xl btn-remove" ></i>:"" }  
 </div>
               {/* form */}
-              <form className='row  pb-4 border-bottom ' >
+              <section className='row  pb-4 border-bottom ' >
 
                 {/* row one */}
                 <div className=" col-md-4 my-2">
                   <div className="input-container">
                   <i className="fa-solid fa-graduation-cap"></i>
-                    <input type="text" className='form-control  ' placeholder='College/Unviersity *' />
+                    <input type="text" className='form-control' defaultValue={educate != 'false' ? educate.educations[index].unviersity : ''} onBlur={forms.handleBlur} onChange={forms.handleChange} name={`educations[${index}].unviersity`} id='unviersity'  placeholder='College/Unviersity *' />
 
                   </div>
                 </div>
                 <div className=" col-md-4 my-2">
                   <div className="input-container">
-                    <i className="fa-solid fa-calendar-days" id='startDateIcon'></i>
-                    <input placeholder='Start Date' type='text' className='form-control  cursor' id="startDate" name="datepicker" />
+                    <input placeholder='Start Date' type='text' className='form-control cursor' defaultValue={educate != 'false' ? educate.educations[index].firstYear : ''} onBlur={forms.handleBlur} onChange={forms.handleChange} name={`educations[${index}].firstYear`} id='firstYear' />
                   </div>
                 </div>
                 <div className=" col-md-4 my-2">
                   <div className="input-container">
-                    <i className="fa-solid fa-calendar-days" id='endDateIcon'></i>
-                    <input placeholder='End Date' type='text' className='form-control  cursor' id="endDate" name="datepicker" />
+                    <input placeholder='End Date' type='text' className='form-control  cursor' defaultValue={educate != 'false' ? educate.educations[index].lastYear : ''} onBlur={forms.handleBlur} onChange={forms.handleChange} name={`educations[${index}].lastYear`} id='lastYear'  />
                   </div>
                 </div>
                 {/* row two */}
                 <div className=" col-md-4 my-2 ">
                   <div className="input-container">
                   <i className="fa-solid fa-scroll"></i>
-                    <input type="text" className='form-control p-2 ' placeholder='Degree *' />
+                    <input type="text" className='form-control p-2 ' placeholder='Degree *' defaultValue={educate != 'false' ? educate.educations[index].degree : ''} onBlur={forms.handleBlur} onChange={forms.handleChange} name={`educations[${index}].degree`} id='degree'  />
                   </div>
                 </div>
                 <div className=" col-md-8 my-2">
                   <div className="input-container">
                     <i className="fa-solid fa-file-lines"></i>
-                    <textarea className='form-control p-2' rows={1} placeholder='Description *' />
+                    <textarea className='form-control p-2' rows={1} placeholder='Description *' defaultValue={educate != 'false' ? educate.educations[index].description : ''} onBlur={forms.handleBlur} onChange={forms.handleChange} name={`educations[${index}].description`} id='description'  />
                   </div>
                 </div>
-              </form>
+              </section>
             </section>)}
 
             {/* buttons */}
-            <div className='w-100 text-center mt-2'>
+           {/* buttons */}
+            <div className='w-100 text-center mt-2 '>
               <Link to='../projects'>
-                <button className=' btn btn-main-disable px-3 m-2'>
+                <button type='button' className=' btn btn-main-disable px-3 mx-2'>
                   <i className="fa-solid fa-angle-left me-2"></i>
                   Back
                 </button>
               </Link>
-              <Link to='../skills'>
-                <button className=' btn btn-main px-3 m-2'>
-                  Next
-                  <i className="fa-solid fa-angle-right ms-2"></i></button>
-              </Link>
-            </div>
 
+              <button type="submit" className=' btn btn-main px-3 mx-2'>
+                Next
+                <i className="fa-solid fa-angle-right ms-2"></i></button>
+
+            </div>
+            </form>
           </div>
 
         </header>

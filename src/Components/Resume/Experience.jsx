@@ -6,7 +6,7 @@ import { useFormik } from 'formik'
 export default function Experience() {
   let { exper, setExper } = useContext(FormContect)
   const navigate = useNavigate();
-
+ 
   // to add
   const [experienceNum, setExperienceNum] = useState(1)
   const [experience, setExperience] = useState(() => {
@@ -37,13 +37,11 @@ export default function Experience() {
     document.querySelectorAll(".endDate").forEach((button) => {
       button.addEventListener("focus", (e) => {
         e.target.setAttribute("type", "date");
-        // document.querySelectorAll('#endDateIcon').style.display = 'none'
       })
     })
     document.querySelectorAll(".startDate").forEach((button) => {
       button.addEventListener("focus", (e) => {
         e.target.setAttribute("type", "date");
-        // document.querySelectorAll('#startDateIcon').style.display = 'none'
       })
     })
 
@@ -57,111 +55,128 @@ export default function Experience() {
       setExperienceNum(updatedExperienceNum);
       setExperience([...experience, updatedExperienceNum]);
       localStorage.setItem('experienceNum', [...experience, updatedExperienceNum]);
+
+    });
+
+    // Update form values whenever experience changes
+    forms.setValues({
+      ...forms.values,
+      experiences: experience.map((e) => ({
+        organisation: '',
+        startDate: '',
+        endDate: '',
+        position: '',
+        description: '',
+      })),
     });
   }, [experience]);
 
 
-  // ==========to get values
-  // Dynamically initialize the experiences array based on the experience prop
-  const initialValues = {
-    experiences: experience.map((e) => ({
-      organisation: '',
-      startDate: '',
-      endDate: '',
-      position: '',
-      description: '',
-    })),
-};
-// Formik
-const forms = useFormik({
-  initialValues,
-  onSubmit: (values) => {
-    console.log('Submitting all values:', values);
-    // You can save or handle the entire form data here
-  },
-});
+
+  // Formik
+  const forms = useFormik({
+    initialValues: {
+      experiences: experience.map((e) => ({
+        organisation: '',
+        startDate: '',
+        endDate: '',
+        position: '',
+        description: '',
+      })),
+    },
+    onSubmit: (values) => {
+      setExper(values)
+      navigate('../projects')
+      // You can save or handle the entire form data here
+    }
+  })
 
 
-
-return (
-  <form className='py-5 container h-auto d-flex align-items-center home ' onSubmit={forms.handleSubmit}>
-    <header className='border border-2 pb-3 container-form w-100'>
-      <h2 className='text-center py-4 border border-1 m-3 shadow-sm'>Experience Details</h2>
-      <div className=' mx-md-5 mx-3 mt-3 mb-3'>
-        {/* to add experience */}
-        <div className='w-100 text-end'>
-          <button id='addExperience' className='btn btn-add  ms-auto' >
-            <i className="fa-solid fa-plus mx-2"></i>
-            Add New Experience </button>
-        </div>
-        {/* experience */}
-
-        {experience?.map((e, index) => <section className=' my-2' key={e}>
-          <div className='d-flex justify-content-between align-items-center'>
-            <h4 className='my-3' style={{ color: '#2590e8' }}>
-              <i className="fa-solid fa-circle-check"></i> Experience {index + 1}</h4>
-            {index != 0 ? <i className="fa-solid fa-circle-xmark fa-xl btn-remove" ></i> : ""}
+  return (
+    <div className='py-5 container h-auto d-flex align-items-center home ' >
+      <header className='border border-2 pb-3 container-form w-100'>
+        <h2 className='text-center py-4 border border-1 m-3 shadow-sm'>Experience Details</h2>
+        <div className=' mx-md-5 mx-3 mt-3 mb-3'>
+          {/* to add experience */}
+          <div className='w-100 text-end'>
+            <button id='addExperience' className='btn btn-add  ms-auto' >
+              <i className="fa-solid fa-plus mx-2"></i>
+              Add New Experience </button>
           </div>
-          {/* form */}
-          <section className='row border-bottom pb-3' >
+          {/* experience */}
+          <form onSubmit={forms.handleSubmit}>
+            {experience?.map((e, index) => <section className=' my-2' key={e}>
+              <div className='d-flex justify-content-between align-items-center'>
+                <h4 className='my-3' style={{ color: '#2590e8' }}>
+                  <i className="fa-solid fa-circle-check"></i> Experience {index + 1}</h4>
 
-            {/* row one */}
-            <div className=" col-md-4 my-2">
-              <div className="input-container">
-                <i className="fa-solid fa-building"></i>
-                <input type="text" className='form-control' onBlur={forms.handleBlur} onChange={forms.handleChange} name={`experiences[${index}].organisation`} id='organisation' placeholder='Organisation *' />
+                {index != 0 ? <i type="button" className="fa-solid fa-circle-xmark fa-xl btn-remove" ></i> : ""}
+              </div>
+              {/* form */}
+
+              <div className='row  border-bottom  pb-3' >
+
+                {/* row one */}
+                <div className=" col-md-4 my-2">
+                  <div className="input-container">
+                    <i className="fa-solid fa-building"></i>
+
+                    <input type="text" className='form-control' defaultValue={exper != 'false' ? exper.experiences[index].organisation : ''} onBlur={forms.handleBlur} onChange={forms.handleChange} name={`experiences[${index}].organisation`} id='organisation' placeholder='Organisation *' />
+
+                  </div>
+                </div>
+                <div className=" col-md-4 my-2">
+                  <div className="input-container">
+                    <input placeholder='Start Date' defaultValue={exper != 'false' ? exper.experiences[index].startDate : ''} type='text' className='form-control startDate cursor' id="startDate" onBlur={forms.handleBlur} onChange={forms.handleChange} name={`experiences[${index}].startDate`} />
+                  </div>
+                </div>
+
+                <div className=" col-md-4 my-2">
+                  <div className="input-container">
+                    <input placeholder='End Date' defaultValue={exper != 'false' ? exper.experiences[index].endDate : ''} type='text' className='form-control endDate cursor' id="endDate" onBlur={forms.handleBlur} onChange={forms.handleChange} name={`experiences[${index}].endDate`} />
+                  </div>
+                </div>
+
+                {/* row two */}
+                <div className=" col-md-4 my-2  ">
+                  <div className="input-container">
+                    <i className="fa-solid fa-couch"></i>
+                    <input type="text" className='form-control p-2 ' defaultValue={exper != 'false' ? exper.experiences[index].position : ''} onBlur={forms.handleBlur} onChange={forms.handleChange} id='position' placeholder='Position *' name={`experiences[${index}].position`} />
+                  </div>
+
+                </div>
+                <div className=" col-md-8 my-2 ">
+                  <div className="input-container">
+                    <i className="fa-solid fa-file-lines"></i>
+                    <textarea className='form-control p-2 ' defaultValue={exper != 'false' ? exper.experiences[index].description : ''} rows={1} id='description' onBlur={forms.handleBlur} onChange={forms.handleChange} placeholder='Description *' name={`experiences[${index}].description`} />
+                  </div>
+                </div>
+
+
 
               </div>
-            </div>
-            <div className=" col-md-4 my-2">
-              <div className="input-container">
-                <i className="fa-solid fa-calendar-days" id='startDateIcon'></i>
-                <input placeholder='Start Date' type='text' className='form-control startDate cursor' id="startDate" onBlur={forms.handleBlur} onChange={forms.handleChange} name={`experiences[${index}].startDate`} />
-              </div>
-            </div>
-            <div className=" col-md-4 my-2">
-              <div className="input-container">
-                <i className="fa-solid fa-calendar-days" id='endDateIcon'></i>
-                <input placeholder='End Date' type='text' className='form-control endDate cursor' id="endDate" onBlur={forms.handleBlur} onChange={forms.handleChange}  name={`experiences[${index}].endDate`} />
-              </div>
-            </div>
-            {/* row two */}
-            <div className=" col-md-4 my-2  ">
-              <div className="input-container">
-                <i className="fa-solid fa-couch"></i>
-                <input type="text" className='form-control p-2 ' onBlur={forms.handleBlur} onChange={forms.handleChange}  id='position' placeholder='Position *' name={`experiences[${index}].position`} />
-              </div>
-            </div>
-            <div className=" col-md-8 my-2 ">
-              <div className="input-container">
-                <i className="fa-solid fa-file-lines"></i>
-                <textarea className='form-control p-2' rows={1} id='description' onBlur={forms.handleBlur} onChange={forms.handleChange}  placeholder='Description *' name={`experiences[${index}].description`} />
-              </div>
-            </div>
+
+
+            </section>)}
             {/* buttons */}
+            <div type="submit" className='w-100 text-center mt-2 pt-4'>
+              <Link to='../'>
+                <button type='button' className=' btn btn-main-disable px-3 mx-2'>
+                  <i className="fa-solid fa-angle-left me-2"></i>
+                  Back
+                </button>
+              </Link>
 
-          </section>
+              <button type='submit' className=' btn btn-main px-3 mx-2'>
+                Next
+                <i className="fa-solid fa-angle-right ms-2"></i></button>
 
-
-        </section>)}
-
-        <div className='w-100 text-center mt-2   pt-4'>
-          <Link to='../'>
-            <button className=' btn btn-main-disable px-3 mx-2'>
-              <i className="fa-solid fa-angle-left me-2"></i>
-              Back
-            </button>
-          </Link>
-
-          <button className=' btn btn-main px-3 mx-2'>
-            Next
-            <i className="fa-solid fa-angle-right ms-2"></i></button>
+            </div>
+          </form>
 
         </div>
-        {/* ))} */}
-      </div>
 
-    </header>
-  </form >
-)
+      </header>
+    </div >
+  )
 }
