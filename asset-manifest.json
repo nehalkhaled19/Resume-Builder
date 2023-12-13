@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/Resume-Builder/static/css/main.fdfe718b.css",
+    "main.js": "/Resume-Builder/static/js/main.7ba9412b.js",
+    "static/js/703.6ce0cf91.chunk.js": "/Resume-Builder/static/js/703.6ce0cf91.chunk.js",
+    "static/js/379.c642d5ca.chunk.js": "/Resume-Builder/static/js/379.c642d5ca.chunk.js",
+    "static/media/fa-solid-900.ttf": "/Resume-Builder/static/media/fa-solid-900.45a265d0f07b31cde85f.ttf",
+    "static/media/fa-brands-400.ttf": "/Resume-Builder/static/media/fa-brands-400.6205fd00fb1b573e9f0f.ttf",
+    "static/media/fa-solid-900.woff2": "/Resume-Builder/static/media/fa-solid-900.fb8184add5a3101ad0a3.woff2",
+    "static/media/fa-brands-400.woff2": "/Resume-Builder/static/media/fa-brands-400.8d3cabfc66809162fb4d.woff2",
+    "static/media/small-logo-PhotoRoom-removebg-preview (2).png": "/Resume-Builder/static/media/small-logo-PhotoRoom-removebg-preview (2).99762cf3049f31fb588e.png",
+    "static/media/fa-regular-400.ttf": "/Resume-Builder/static/media/fa-regular-400.adc51aab4d771ab65f81.ttf",
+    "static/media/home-img-1.png": "/Resume-Builder/static/media/home-img-1.1ec591f76ce6433c13de.png",
+    "static/media/fa-regular-400.woff2": "/Resume-Builder/static/media/fa-regular-400.e931bc0d14f5bbb1da22.woff2",
+    "static/media/fa-v4compatibility.ttf": "/Resume-Builder/static/media/fa-v4compatibility.2eb7b3ef25042305f3ff.ttf",
+    "static/media/fa-v4compatibility.woff2": "/Resume-Builder/static/media/fa-v4compatibility.b3049b13a93f07e026fc.woff2",
+    "index.html": "/Resume-Builder/index.html",
+    "main.fdfe718b.css.map": "/Resume-Builder/static/css/main.fdfe718b.css.map",
+    "main.7ba9412b.js.map": "/Resume-Builder/static/js/main.7ba9412b.js.map",
+    "703.6ce0cf91.chunk.js.map": "/Resume-Builder/static/js/703.6ce0cf91.chunk.js.map",
+    "379.c642d5ca.chunk.js.map": "/Resume-Builder/static/js/379.c642d5ca.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fdfe718b.css",
+    "static/js/main.7ba9412b.js"
+  ]
+}
