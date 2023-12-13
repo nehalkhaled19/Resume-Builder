@@ -17,21 +17,7 @@ export default function Experience() {
 
   useEffect(() => {
     // to remove
-    document.querySelectorAll(".btn-remove").forEach((button) => {
-      button.addEventListener("click", () => {
-        setExperience((prevExperience) => {
-          // Ensure the array is not empty before removing the last item
-          if (prevExperience.length > 0) {
-            const updatedExperience = prevExperience.slice(0, -1);
-            // Save the updated array to local storage
-            localStorage.setItem('experienceNum', updatedExperience);
-            return updatedExperience;
-          } else {
-            return prevExperience;
-          }
-        });
-      })
-    })
+
 
     // date input
     document.querySelectorAll(".endDate").forEach((button) => {
@@ -91,7 +77,21 @@ export default function Experience() {
     }
   })
 
-
+function remove(){
+  setExperience((prevExperience) => {
+    // Ensure the array is not empty before removing the last item
+    if (prevExperience.length > 0) {
+      const updatedExperience = prevExperience.slice(0, -1);
+      // Save the updated array to local storage
+      localStorage.setItem('experienceNum', updatedExperience);
+      return updatedExperience;
+    } else {
+      return prevExperience;
+    }
+  });
+}
+   
+ 
   return (
     <div className='py-5 container h-auto d-flex align-items-center home ' >
       <header className='border border-2 pb-3 container-form w-100'>
@@ -110,7 +110,7 @@ export default function Experience() {
                 <h4 className='my-3' style={{ color: '#2590e8' }}>
                   <i className="fa-solid fa-circle-check"></i> Experience {index + 1}</h4>
 
-                {index != 0 ? <i type="button" className="fa-solid fa-circle-xmark fa-xl btn-remove" ></i> : ""}
+                {index != 0 ? <i type="button" onClick={()=>remove()} className="fa-solid fa-circle-xmark fa-xl btn-remove" ></i> : ""}
               </div>
               {/* form */}
 
@@ -121,19 +121,19 @@ export default function Experience() {
                   <div className="input-container">
                     <i className="fa-solid fa-building"></i>
 
-                    <input type="text" className='form-control' defaultValue={exper != 'false' ? exper.experiences[index].organisation : ''} onBlur={forms.handleBlur} onChange={forms.handleChange} name={`experiences[${index}].organisation`} id='organisation' placeholder='Organisation *' />
+                    <input type="text" className='form-control' defaultValue={exper != 'false' ? exper.experiences[index]?.organisation : ''} onBlur={forms.handleBlur} onChange={forms.handleChange} name={`experiences[${index}].organisation`} id='organisation' placeholder='Organisation *' />
 
                   </div>
                 </div>
                 <div className=" col-md-4 my-2">
                   <div className="input-container">
-                    <input placeholder='Start Date' defaultValue={exper != 'false' ? exper.experiences[index].startDate : ''} type='text' className='form-control startDate cursor' id="startDate" onBlur={forms.handleBlur} onChange={forms.handleChange} name={`experiences[${index}].startDate`} />
+                    <input placeholder='Start Date' defaultValue={exper != 'false' ? exper.experiences[index]?.startDate : ''} type='text' className='form-control startDate cursor' id="startDate" onBlur={forms.handleBlur} onChange={forms.handleChange} name={`experiences[${index}].startDate`} />
                   </div>
                 </div>
 
                 <div className=" col-md-4 my-2">
                   <div className="input-container">
-                    <input placeholder='End Date' defaultValue={exper != 'false' ? exper.experiences[index].endDate : ''} type='text' className='form-control endDate cursor' id="endDate" onBlur={forms.handleBlur} onChange={forms.handleChange} name={`experiences[${index}].endDate`} />
+                    <input placeholder='End Date' defaultValue={exper != 'false' ? exper.experiences[index]?.endDate : ''} type='text' className='form-control endDate cursor' id="endDate" onBlur={forms.handleBlur} onChange={forms.handleChange} name={`experiences[${index}].endDate`} />
                   </div>
                 </div>
 
@@ -141,14 +141,14 @@ export default function Experience() {
                 <div className=" col-md-4 my-2  ">
                   <div className="input-container">
                     <i className="fa-solid fa-couch"></i>
-                    <input type="text" className='form-control p-2 ' defaultValue={exper != 'false' ? exper.experiences[index].position : ''} onBlur={forms.handleBlur} onChange={forms.handleChange} id='position' placeholder='Position *' name={`experiences[${index}].position`} />
+                    <input type="text" className='form-control p-2 ' defaultValue={exper != 'false' ? exper.experiences[index]?.position : ''} onBlur={forms.handleBlur} onChange={forms.handleChange} id='position' placeholder='Position *' name={`experiences[${index}].position`} />
                   </div>
 
                 </div>
                 <div className=" col-md-8 my-2 ">
                   <div className="input-container">
                     <i className="fa-solid fa-file-lines"></i>
-                    <textarea className='form-control p-2 ' defaultValue={exper != 'false' ? exper.experiences[index].description : ''} rows={1} id='description' onBlur={forms.handleBlur} onChange={forms.handleChange} placeholder='Description *' name={`experiences[${index}].description`} />
+                    <textarea className='form-control p-2 ' defaultValue={exper != 'false' ? exper.experiences[index]?.description : ''} rows={1} id='description' onBlur={forms.handleBlur} onChange={forms.handleChange} placeholder='Description *' name={`experiences[${index}].description`} />
                   </div>
                 </div>
 

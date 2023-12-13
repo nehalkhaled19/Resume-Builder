@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import $ from 'jquery'
 import Tagify from '@yaireo/tagify'
 import { FormContect } from '../../ContextForm'
-
+import DownloadButton from '../DownloadResume/DownloadButton';
+import MyResume from '../DownloadResume/MyResume'
+import '../DownloadResume/CV.css'
 export default function Skills() {
   let { setTechnical, setLanguages, setPersonalSkills } = useContext(FormContect)
-
 
   useEffect(() => {
     let inputs = document.querySelectorAll('.tags-input');
@@ -18,26 +19,34 @@ export default function Skills() {
     });
 
     $('.tagify').addClass('form-control');
-    // -------------------------------------------------------
-
-    // to get Technical Skills
-    let technicalTitles = $('#technicalSkills tags').find('.tagify__tag').map(function () {
-      return $(this).attr('title');
-    }).get();
-    // to get Personal Skills
-    let PersonalTitles = $('#personalSkills tags').find('.tagify__tag').map(function () {
-      return $(this).attr('title');
-    }).get();
-    // to get languages
-    let languages = $('#languages tags').find('.tagify__tag').map(function () {
-      return $(this).attr('title');
-    }).get();
-    setTechnical(technicalTitles)
-    setLanguages(languages)
-    setPersonalSkills(PersonalTitles)
-
+    // to get skills
+    $('.tagify').on('keyup', () => {
+      getSkills()
+    })
+  
   }, [])
-  return <section className='py-5  container d-flex align-items-center home '>
+  function getSkills() {
+    // for languages
+    let lan = []
+    let languages = $('#languages tags').find('.tagify__tag').map(function () {
+      lan.push($(this).attr('value'))
+    })
+    setLanguages(lan)
+    // for Technical
+    let tec = []
+    let technicalTitles = $('#technicalSkills tags').find('.tagify__tag').map(function () {
+      tec.push($(this).attr('value'))
+    })
+    setTechnical(tec)
+    // for Technical
+    let per = []
+    let PersonalTitles = $('#personalSkills tags').find('.tagify__tag').map(function () {
+      per.push($(this).attr('value'))
+    })
+    setPersonalSkills(per)
+  }
+
+  return <section className='py-5 h-auto  container d-flex align-items-center home '>
     <header className='border border-2 pb-3 container-form w-100'>
       <h2 className='text-center py-4 border border-1 m-3 shadow-sm'>Skills </h2>
       <div className=' mx-md-5 mx-3 mt-3 mb-3'>
@@ -66,20 +75,16 @@ export default function Skills() {
               Back
             </button>
           </Link>
-          <Link style={{ opacity: '0' }}>
+
+          <Link to={'../cv'}>
             <button className=' btn btn-main  px-3'>
-              Next
+              See Your Resume
               <i className="fa-solid fa-angle-right ms-2"></i></button>
           </Link>
+        </div>
 
-        </div>
-        <div className='text-end my-2' >
-          <Link >
-            <button className='btn btn-add px-3'>
-              DOWNLOAD RESUME
-              <i className=" mx-2 fa-solid fa-download" c></i></button>
-          </Link>
-        </div>
+
+
       </div>
 
     </header>

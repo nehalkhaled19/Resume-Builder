@@ -1,5 +1,5 @@
 import { Formik, useFormik } from 'formik'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { FormContect } from '../../ContextForm'
@@ -14,10 +14,10 @@ export default function PersonalDetails() {
     phone: Yup.string().matches(/^\d+$/, 'Enter a valid phone number'),
     title: Yup.string(),
   });
-
+ 
   // Formik
   const forms = useFormik({
-    initialValues: {
+      initialValues: {
       name: '',
       email: '',
       portfolio: '',
@@ -25,9 +25,12 @@ export default function PersonalDetails() {
       phone: '',
       title: '',
       github: '',
+      address: '',
       facebook: '',
+      description:''
     },
     onSubmit: (values) => {
+  
       setPersonal(values);
       navigate('experience');
     },
@@ -36,11 +39,11 @@ export default function PersonalDetails() {
 
 
   return (
-    <section className='py-5  container px-0 d-flex align-items-center home h-auto' style={{ overflow: 'hidden' }} >
-      <div className='border border-2 pb-3 container-form w-100'>
+    <section className='py-5 px-0 container d-flex align-items-center home h-auto' style={{ overflow: 'hidden' }} >
+      <div className=' pb-3 container-form w-100'>
         <h2 className='text-center py-4 border border-1 m-3 shadow-sm'>Personal Details</h2>
         {/* form */}
-        <form className="row justify-content-around pt-4" onSubmit={forms.handleSubmit}>
+        <form className="row justify-content-around " onSubmit={forms.handleSubmit}>
           <div className="col-lg-5 ">
             <div className='px-md-5 px-2'>
               <div>
@@ -62,7 +65,10 @@ export default function PersonalDetails() {
                   <input defaultValue={personal.portfolio} onBlur={forms.handleBlur} onChange={forms.handleChange} type="text" name='portfolio' id='portfolio' className='form-control p-2 ' placeholder='Your Portfolio ' />
 
                 </div>
-
+                <div className="input-container  my-3">
+                  <i className="fa-solid fa-location-dot fa-lg"></i>
+                  <input defaultValue={personal.address} type="text" onBlur={forms.handleBlur} onChange={forms.handleChange} name='address' id='address' className='form-control p-2' placeholder='address *' />
+                </div>
                  <div className="input-container my-lg-3 mb-0">
                   <i className="fa-brands fa-linkedin fa-lg"></i>
                   <input type="text" defaultValue={personal.linkedin} onBlur={forms.handleBlur} onChange={forms.handleChange} name='linkedin' id='linkedin' className='form-control p-2 ' placeholder='Linkedin *' />
@@ -70,7 +76,7 @@ export default function PersonalDetails() {
               </div>
             </div>
           </div>
-          <div className="col-lg-5">
+          <div className="col-lg-5 mb-4">
             <div className='px-md-5 px-2'>
               <section >
                 <div className='my-3'>
@@ -88,16 +94,22 @@ export default function PersonalDetails() {
                   <i className="fa-brands fa-square-github fa-lg"></i>
                   <input defaultValue={personal.github} type="text" onBlur={forms.handleBlur} onChange={forms.handleChange} name='github' id='github' className='form-control p-2' placeholder='GitHub ' />
                 </div>
+              
                 <div className="input-container  my-3">
                   <i className="fa-brands fa-facebook fa-lg"></i>
                   <input defaultValue={personal.facebook} type="text" onBlur={forms.handleBlur} onChange={forms.handleChange} name='facebook' id='facebook' className='form-control p-2' placeholder='Facebook *' />
                 </div>
+
+              <div className="input-container">
+                <i className="fa-solid fa-file-lines"></i>
+                <textarea className='form-control p-2 ' defaultValue={personal.description} rows={1} id='description' onBlur={forms.handleBlur} onChange={forms.handleChange} placeholder='Job Summry *' name='description'/>
+           
+            </div>
               </section>
             </div>
           </div>
           {/* buttons */}
-          <div className=' text-center border-top p-0 pt-3'>
-
+          <div className=' border-top text-center px-2 pt-3'>
             <button type='button' className=' btn btn-main-disable px-3 m-2' style={{ opacity: '0' }}>
               <i className="fa-solid fa-angle-left me-2"></i>
               Back

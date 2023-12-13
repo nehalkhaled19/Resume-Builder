@@ -10,17 +10,22 @@ export default function FormContectProvider(props) {
     phone: '',
     title: '',
     github: '',
-    facebook: '',
+    address: '',
+    description:''
   });
   const [exper, setExper] = useState('false')
   const [pro, setPro] = useState('false')
   const [educate, setEducate] = useState('false')
-  const [technical, setTechnical] = useState('false')
-  const [personalSkills, setPersonalSkills] = useState('false')
-  const [languages, setLanguages] = useState('false')
+  const [technical, setTechnical] = useState([])
+  const [personalSkills, setPersonalSkills] = useState([])
+  const [languages, setLanguages] = useState([])
 
 
-  return <FormContect.Provider value={{ personal, setPersonal, exper, setExper, pro, setPro, educate, setEducate,setTechnical,setLanguages,setPersonalSkills }}>
+console.log(technical);
+console.log(personalSkills);
+console.log(languages);
+
+  return <FormContect.Provider value={{ personal, personalSkills,languages,technical ,setPersonal, exper, setExper, pro, setPro, educate, setEducate,setTechnical,setLanguages,setPersonalSkills }}>
     {props.children}
   </FormContect.Provider>
 }
